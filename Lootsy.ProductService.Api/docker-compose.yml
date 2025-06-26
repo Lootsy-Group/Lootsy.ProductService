@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  productservice.api:
+    image: lootsyproductserviceapi
+    container_name: Lootsy.ProductService.Api
+    build:
+      context: .
+      dockerfile: Lootsy.ProductService.Api/Dockerfile
+    ports:
+        - "5050:5050"
+        - "5051:5051"
+  
+  productdb:
+    image: postgres:latest
+    container_name: Lootsy.ProductService.Database
+    environment:
+      POSTGRES_DB: Lootsy.ProductService
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: victus2019
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5454:5432"
+    
+volumes:
+  db_data:

@@ -1,12 +1,12 @@
 version: "3.8"
 
 services:
-  productservice.api:
-    image: lootsyproductserviceapi
+  lootsy.productservice.api:
     container_name: Lootsy.ProductService.Api
     build:
       context: .
       dockerfile: Lootsy.ProductService.Api/Dockerfile
+    image: lootsy.productservice.api
     ports:
         - "5050:5050"
         - "5051:5051"

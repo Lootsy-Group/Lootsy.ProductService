@@ -14,4 +14,24 @@ public class Product : AuditableEntity
     public ProductStatus Status { get; set; }
     public Guid CategoryId { get; set; }
     public ProductDetails Details { get; set; } = default!;
+
+    public Product() { }
+
+    public Product(
+        Guid sellerId, string name, decimal price, string imageUrl, ProductStatus status, Guid categoryId)
+    {
+        Id = Guid.NewGuid();
+        SellerId = sellerId;
+        Name = name;
+        Price = price;
+        ImageUrl = imageUrl;
+        Status = status;
+        CategoryId = categoryId;
+        CreatedAt = DateTime.UtcNow;
+    }
+
+    public void SetDetails(ProductDetails details)
+    {
+        Details = details;
+    }
 }

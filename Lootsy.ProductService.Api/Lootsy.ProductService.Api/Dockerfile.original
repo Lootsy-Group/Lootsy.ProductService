@@ -4,8 +4,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 5050
-EXPOSE 5051
+EXPOSE 8080
+EXPOSE 8081
 
 
 # This stage is used to build the service project
@@ -13,9 +13,6 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Lootsy.ProductService.Api/Lootsy.ProductService.Api.csproj", "Lootsy.ProductService.Api/"]
-COPY ["Lootsy.ProductService.Application/Lootsy.ProductService.Application.csproj", "Lootsy.ProductService.Application/"]
-COPY ["Lootsy.ProductService.Domain/Lootsy.ProductService.Domain.csproj", "Lootsy.ProductService.Domain/"]
-COPY ["Lootsy.ProductService.Infrastructure/Lootsy.ProductService.Infrastructure.csproj", "Lootsy.ProductService.Infrastructure/"]
 RUN dotnet restore "./Lootsy.ProductService.Api/Lootsy.ProductService.Api.csproj"
 COPY . .
 WORKDIR "/src/Lootsy.ProductService.Api"

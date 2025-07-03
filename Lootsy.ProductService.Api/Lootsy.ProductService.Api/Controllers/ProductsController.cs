@@ -50,7 +50,8 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateProductCommand command)
     {
-        var id = await _mediator.Send(command);
-        return CreatedAtAction(nameof(GetById), new { id }, new { id });
+        var result = await _mediator.Send(command);
+
+        return CreatedAtAction(nameof(GetById), new GetProductQuery(result.Value), new {result.Value});
     }
 }
